@@ -3,14 +3,14 @@
 {% block body %}
 <div class="row">
     <div class="col-3"></div>
-    <div class="col-6">
-        <h1>Inscription </h1>
-        {{ form_start(newUserForm) }}
-        {{ form_errors(newUserForm) }}
+        <div class="col-6">
+            <h1>Inscription </h1>
+                {{ form_start(newUserForm) }}
+                {{ form_errors(newUserForm) }}
 
-        {{ form_rest(newUserForm) }}
-        <button type="submit">Envoyer</button>
-
-        {{ form_end (newUserForm) }}
-    </div>
-    {% endblock %}
+                {{ form_rest(newUserForm) }}
+                    <button type="submit">Envoyer</button>
+                {{ form_end (newUserForm) }}
+        </div>
+</div>
+{% endblock %}

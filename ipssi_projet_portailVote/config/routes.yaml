@@ -5,3 +5,7 @@
 userInscription:
   resource: 'routes/user/userInscription.yml'
   prefix: 'inscription'
+
+securityLogin:
+  resource: 'routes/security/login.yml'
+  prefix: 'login'

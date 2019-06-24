@@ -1,0 +1,3 @@
+securityLogin:
+  path: /
+  controller: App\Controller\SecurityController::userLogin
