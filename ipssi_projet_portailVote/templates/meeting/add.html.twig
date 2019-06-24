@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if isOk %}
+        <h1>Le jeux a bien été crée</h1>
+    {% else %}
+        {{ form_start(meetingForm) }}
+        {{ form_rest(meetingForm) }}
+        <button type="submit">Ajouter le jeux</button>
+        {{ form_end(meetingForm) }}
+    {% endif %}
+{% endblock %}
