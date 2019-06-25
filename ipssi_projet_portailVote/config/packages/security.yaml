@@ -1,37 +1,37 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User:
+        App\Entity\User:
             algorithm: bcrypt
-
     providers:
-        in_memory:
-            memory:
-                users:
-                    admin:
-                        password:  $2y$13$VEFurLV4Vw8OJDamy1CDdeMOPEVwW3LZlIKJE5Cq/NQjW6l73g51q
-                        roles: 'ROLE_ADMIN'
-
-                    member:
-                        password:  $2y$13$yCTx3NNGOmKiLTTbcrkDpOez2HGt/Okro/jTuEy8OKj3JsVUKr.mG
-                        roles: 'ROLE_USER'
-
+        our_db_provider:
+            entity:
+                class: App\Entity\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            anonymous: ~
+            pattern:    ^/
+            http_basic: ~
+            user_checker: App\Security\UserChecker
+            provider: our_db_provider
 
+            form_login:
+               login_path: login
+               check_path: login
+               csrf_token_generator: security.csrf.token_manager
+            logout:
+               path: /logout
+               target: /
+            switch_user: ~
 
+    role_hierarchy:
+        #un membre avec le ROLE_ADMIN aura également le ROLE_USER
+        ROLE_ADMIN: ROLE_USER
+        #Le ROLE_SUPER_ADMIN avec le ROLE_ALLOWED_TO_SWITCH qui permet de s'authentifier en se faisant passer pour n'importe quel membre. Particulièrement utile pour débugger son code.
+        #ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+
+        - { path: ^/admin, roles: ROLE_ADMIN }

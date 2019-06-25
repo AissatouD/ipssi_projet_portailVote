@@ -1,3 +1,0 @@
-userAccount:
-  path: /
-  controller: App\Controller\UserAccountController::index

@@ -2,14 +2,17 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-userInscription:
-  resource: 'routes/user/userInscription.yaml'
-  prefix: 'inscription'
+#resource: 'routes/user/userInscription.yaml'
+  #prefix: 'inscription'
 
-securityLogin:
-  resource: 'routes/security/login.yaml'
-  prefix: 'login'
+#securityLogin:
+  #resource: 'routes/security/login.yaml'
+  #prefix: 'login'
 
-userAccount:
-  resource: 'routes/user/userAccount.yaml'
-  prefix: 'userAccount'
+#userAccount:
+  #resource: 'routes/user/userAccount.yaml'
+  #prefix: 'userAccount'
+
+#userLogout:
+  #resource: 'routes/user/userLogout.yaml'
+  #prefix: 'logout'
