@@ -1,13 +1,15 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Controller;
 
 use App\Form\UserType;
-
+use App\Entity\User;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+
 
 
 class UserController extends AbstractController
@@ -38,6 +40,21 @@ class UserController extends AbstractController
         ]);
     }
 
+    public function update(Request $request, User $user): Response
+    {
+        $isOk = false;
+        $newUserForm = $this->createForm(UserType::class, $user);
+        $newUserForm->handleRequest($request);
+        if($newUserForm->isSubmitted() && $newUserForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $isOk = true;
+        }
+        return $this->render('user/update.html.twig', [
+            'userForm' => $newUserForm->createView(),
+            'isOk' => $isOk
+        ]);
+    }
 
 
 }

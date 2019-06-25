@@ -3,13 +3,13 @@
 #    controller: App\Controller\DefaultController::index
 
 userInscription:
-  resource: 'routes/user/userInscription.yml'
+  resource: 'routes/user/userInscription.yaml'
   prefix: 'inscription'
 
 securityLogin:
-  resource: 'routes/security/login.yml'
+  resource: 'routes/security/login.yaml'
   prefix: 'login'
 
 userAccount:
-  resources: 'routes/user/userAccount.yml'
+  resource: 'routes/user/userAccount.yaml'
   prefix: 'userAccount'

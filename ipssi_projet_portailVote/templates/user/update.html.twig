@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if isOk %}
+        <h1>vos données ont bien été modifié</h1>
+    {% else %}
+        {{ form_start(userForm) }}
+        {{ form_rest(userForm) }}
+        <button type="submit">Modifier</button>
+        {{ form_end(userForm) }}
+    {% endif %}
+{% endblock %}
