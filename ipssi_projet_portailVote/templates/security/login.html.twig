@@ -5,6 +5,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 .col-md-offset-3">
+            {% if error %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
             <form class="form-signin" method="POST" action="{{ path('login') }}">
                 <div class="text-center mb-4">
                     <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
@@ -18,8 +21,9 @@
                            name="_username"
                            placeholder="Nom d'utilisateur"
                            required
-                           autofocus>
-                    <label for="_username">Adresse mail</label>
+                           autofocus
+                           value="{{ last_username }}">
+                    <label for="_username">Nom d'utilisateur</label>
                 </div>
 
                 <div class="form-label-group">
@@ -30,6 +34,8 @@
                            required>
                     <label for="_password">Mot de passe</label>
                 </div>
+
+                <input type="hidden" name="_target_path" value="{{ path('userAccount') }}" />
 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
 

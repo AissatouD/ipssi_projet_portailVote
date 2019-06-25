@@ -9,3 +9,7 @@ userInscription:
 securityLogin:
   resource: 'routes/security/login.yml'
   prefix: 'login'
+
+userAccount:
+  resources: 'routes/user/userAccount.yml'
+  prefix: 'userAccount'
