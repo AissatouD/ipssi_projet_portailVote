@@ -1,7 +1,6 @@
 <?php
 declare(strict_types = 1);
 namespace App\Controller;
-
 use App\Entity\Meeting;
 use App\Form\MeetingType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,35 +8,31 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
 /**
      * @Route("/meeting", name="meeting")
      */
 class MeetingController extends AbstractController
 {
-
-
     /**
      * @Route("/add")
      */
     public function add(Request $request): Response 
     {
         $isOk = false;
-        if($newMeetingForm->isSubmitted() && $newMeetingForm->isValid()) {
+        
         $newMeetingForm = $this->createForm(MeetingType::class);
         $newMeetingForm->handleRequest($request);
+        if($newMeetingForm->isSubmitted() && $newMeetingForm->isValid()) {
         $em = $this->getDoctrine()->getManager();
         $em->persist($newMeetingForm->getData());
         $em->flush();
         $isOk = true;
         }
-
         return $this->render('meeting/add.html.twig', [
-            'MeetingForm' => $newMeetingForm->createView(),
+            'meetingForm' => $newMeetingForm->createView(),
             'isOk' => $isOk,
         ]);
     }
-
     /**
      * @Route(path="/edit/{id}")
      */
@@ -51,9 +46,8 @@ class MeetingController extends AbstractController
             $em->flush();
             $isOk = true;
         }
-
         return $this->render('meeting/edit.html.twig', [
-            'MeetingForm' => $newMeetingForm->createView(),
+            'meetingForm' => $newMeetingForm->createView(),
             'isOk' => $isOk
         ]);
     }
@@ -66,10 +60,8 @@ class MeetingController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($meeting);
         $em->flush();
-        // return $this->redirectToRoute('app_meeting_list');
+        return $this->redirectToRoute('meetingapp_meeting_list');
     }
-
-
      /**
      * @Route(path="/list")
      */
@@ -80,6 +72,5 @@ class MeetingController extends AbstractController
             'meetings' => $repository->findAll()
         ]);
     }
-
         
 }
