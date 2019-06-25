@@ -1,3 +1,3 @@
 userAccount:
   path: /
-  controller: App\Controller\UserAccountController::index()
+  controller: App\Controller\UserAccountController::index
