@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace App\Controller;
 use App\Entity\Meeting;
 use App\Form\MeetingType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -65,11 +66,17 @@ class MeetingController extends AbstractController
      /**
      * @Route(path="/list")
      */
-    public function list(): Response
+    public function list(PaginatorInterface $paginator, Request $request): Response
     {
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
+
+        $pagination = $paginator->paginate(
+            $repository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5 /*limit per page*/
+        );
         return $this->render('meeting/list.html.twig', [
-            'meetings' => $repository->findAll()
+            'meetings' => $pagination
         ]);
     }
         
