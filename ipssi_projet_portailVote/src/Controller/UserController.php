@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 
 
+
 class UserController extends AbstractController
 {
     /**
@@ -39,8 +40,11 @@ class UserController extends AbstractController
             //'isOk' => $isOk,
         ]);
     }
+    /**
+     * @Route("/update/{id}")
+     */
 
-    public function update(Request $request, User $user): Response
+    public function update(Request $request,User $user): Response
     {
         $isOk = false;
         $newUserForm = $this->createForm(UserType::class, $user);
@@ -50,6 +54,7 @@ class UserController extends AbstractController
             $em->flush();
             $isOk = true;
         }
+        return $this->redirectToRoute("app_user_update");
         return $this->render('user/update.html.twig', [
             'userForm' => $newUserForm->createView(),
             'isOk' => $isOk

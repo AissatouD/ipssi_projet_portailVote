@@ -6,6 +6,3 @@ inscription:
   path: /
   controller: App\Controller\UserController::inscription
 
-update:
-  path: /
-  controller: App\Controller\UserController::update
