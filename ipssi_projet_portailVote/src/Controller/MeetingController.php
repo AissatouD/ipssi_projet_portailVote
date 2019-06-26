@@ -76,19 +76,17 @@ class MeetingController extends AbstractController
     public function list(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
-<<<<<<< HEAD
+
         $meetings = $repository->findAll();
-        
+
         return $this->render(
             'meeting/list.html.twig',
             [
-            'meetings' => $repository->findAll(),
+                'meetings' => $repository->findAll(),
             ]
         );
-    }
 
-}
-=======
+
         return $this->render('meeting/list.html.twig', [
             'meetings' => $repository->findAll()
         ]);
@@ -112,4 +110,4 @@ dump($result);exit;
 
     }
 }
->>>>>>> e1e992a4ee0a5e574b7664ffbf9a1bdd13f75f01
+
