@@ -11,12 +11,27 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Meeting|null findOneBy(array $criteria, array $orderBy = null)
  * @method Meeting[]    findAll()
  * @method Meeting[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Meeting[]    getTitle()
  */
 class MeetingRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Meeting::class);
+    }
+
+    /**
+     * @param string|null $keyword
+     * @return mixed
+     */
+    public function getTitle(?string $keyword)
+    {
+
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.title LIKE :key')
+            ->setParameter('key' , '%'.$keyword.'%')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
@@ -47,4 +62,5 @@ class MeetingRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }
