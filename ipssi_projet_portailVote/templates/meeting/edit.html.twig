@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if isOk %}
+        <h1>La conférence a bien été modifiée</h1>
+    {% else %}
+        {{ form_start(meetingForm) }}
+        {{ form_rest(meetingForm) }}
+        <button type="submit">Modifier la conférence</button>
+        {{ form_end(meetingForm) }}
+    {% endif %}
+{% endblock %}

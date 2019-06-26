@@ -19,6 +19,7 @@
         "symfony/security-csrf": "4.3.*",
         "symfony/twig-bundle": "4.3.*",
         "symfony/validator": "4.3.*",
+        "symfony/web-server-bundle": "4.3.*",
         "symfony/yaml": "4.3.*",
         "twig/twig": "^2.0"
     },
@@ -68,7 +69,6 @@
         }
     },
     "require-dev": {
-        "symfony/debug-pack": "^1.0",
-        "symfony/web-server-bundle": "4.3.*"
+        "symfony/debug-pack": "^1.0"
     }
 }
