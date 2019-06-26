@@ -18,8 +18,23 @@ class SecurityController extends AbstractController
         // Pour gérer les erreur de connexion
         $error = $authUtils->getLastAuthenticationError();
 
-        // le dernier username entré par le user
+        // le dernier username entrée par le user
         $lastUsername = $authUtils->getLastUsername();
+
+        if ($error){
+            $this->addFlash('login', 'Erreur d\'authenfication, veuillez vérifier vos accès et réessayer');
+        }
+
+        // connexion en tant qu'admin
+        if (TRUE=== $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+            return $this->redirectToRoute('user_admin');
+        }
+
+        // connexion en tant qu'utilisateur membre
+        if (TRUE=== $this->get('security.authorization_checker')->isGranted('ROLE_USER')){
+            return $this->redirectToRoute('user_account');
+        }
+
 
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
@@ -27,26 +42,19 @@ class SecurityController extends AbstractController
         ));
     }
 
-  /*  public function  connectionForm(){
+    /**
+     * @return mixed
+     */
 
-        // on créé un nouvel objet user
-        $connectionForm = new User();
+    public function userLogout(){
 
-        //on créé le queryBuilder grace a 'form.factory'
-        $formBuilder = $this->createFormBuilder( $connectionForm);
+        // déconnexion
+        if($this->get('security.token_storage')->getToken()->getUser()){
+            $this->get('security.token_storage')->setToken(null);
+            $this->addFlash('logout', 'Logout');
+            return $this->redirectionToRoute('home');
+        }
+    }
 
-        // on ajoute les champs du formulaire
-        $formBuilder
-            ->add('mail', EmailType::class)
-            ->add('firstname',TextType::class)
-            ->add('password', PasswordType::class)
-            ->getForm();
-        //$formBuilder->handleRequest();
 
-        //on retourne la vue
-        return $this->render('security/login.html.twig', array(
-            'form' => $formBuilder->createView(),
-
-            ));
-    }*/
 }
