@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if isOk %}
+        <h1>Votre note a bien été soumis</h1>
+    {% else %}
+        {{ form_start(voteForm) }}
+        {{ form_rest(voteForm) }}
+        <button type="submit">Noter</button>
+        {{ form_end(voteForm) }}
+    {% endif %}
+{% endblock %}

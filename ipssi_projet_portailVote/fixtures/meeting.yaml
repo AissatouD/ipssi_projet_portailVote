@@ -1,0 +1,6 @@
+App\Entity\Meeting:
+  meeting-{1..30}:
+    title: <jobTitle()>
+    description: <username()>
+    date: "<dateTimeBetween('now', 'next year')>"
+    location: <city()>

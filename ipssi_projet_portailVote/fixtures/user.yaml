@@ -1,0 +1,7 @@
+App\Entity\User:
+  user-{1..60}:
+    mail: <email()>
+    password: <country()>
+    firstname: <firstname()>
+    lastname: <lastname()>
+    statut: <boolean()>
