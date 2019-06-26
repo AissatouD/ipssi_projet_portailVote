@@ -1,9 +1,9 @@
 <?php
-declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Entity\Meeting;
 use App\Form\MeetingType;
+use App\Repository\MeetingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -76,6 +76,7 @@ class MeetingController extends AbstractController
     public function list(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
+<<<<<<< HEAD
         $meetings = $repository->findAll();
         
         return $this->render(
@@ -87,3 +88,28 @@ class MeetingController extends AbstractController
     }
 
 }
+=======
+        return $this->render('meeting/list.html.twig', [
+            'meetings' => $repository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="search")
+     * @param Request $request
+     * @return Response
+     */
+    public function searchAction(Request $request)
+    {
+        /** @var MeetingRepository $repo */
+        $repo = $this->getDoctrine()->getManager()->getRepository(Meeting::class);
+        $keyword = $request->request->get('search');
+
+        $result = $repo->getTitle($keyword);
+dump($result);exit;
+        return $this->render('meeting/search.html.twig', [
+            'result' => $result]);
+
+    }
+}
+>>>>>>> e1e992a4ee0a5e574b7664ffbf9a1bdd13f75f01
