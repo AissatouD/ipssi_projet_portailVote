@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 Use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ * fields= {"mail"}, message= "L'email que vous avez utilisé est déjà utiliser. Connectez-vous avec en cliquant sur 'SE CONNECTER' dans le menu")
  */
 class User implements UserInterface
 {
@@ -21,6 +24,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $mail;
 
@@ -170,4 +174,6 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
+
 }

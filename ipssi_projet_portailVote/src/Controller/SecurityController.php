@@ -11,10 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/security", name="login")
+     * @Route("/login", name="login")
      */
-    public function userLogin(Request $request, AuthenticationUtils $authUtils)
+    public function userLogin()
     {
+        /*
         // Pour gérer les erreur de connexion
         $error = $authUtils->getLastAuthenticationError();
 
@@ -35,15 +36,14 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('user_account');
         }
 
+*/
+        return $this->render('security/login.html.twig');
 
-        return $this->render('security/login.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
     }
 
     /**
      * @return mixed
+     * @Route("/logout", name="logout")
      */
 
     public function userLogout(){

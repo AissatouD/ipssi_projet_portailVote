@@ -1,13 +1,13 @@
 security:
-    encoders:
+    encoders: # pour encoder les mots de passe
         App\Entity\User:
             algorithm: auto
-    providers:
-        our_db_provider:
+    providers: # où se trouve les utilisateurs
+        in_database:
             entity:
                 class: App\Entity\User
-                property: firstname
-    firewalls:
+                property: mail
+    firewalls: # gérer les firewalls pour la protection
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -15,15 +15,15 @@ security:
             anonymous: true
             pattern:    ^/
             http_basic: ~
-            user_checker: App\Security\UserChecker
-            provider: our_db_provider
+            user_checker:
+            provider: in_database
 
             form_login:
-               login_path: /security
-               check_path: /security
+               login_path: login
+               check_path: login
                csrf_token_generator: security.csrf.token_manager
             logout:
-               path: /logout
+               path: logout
                target: /
             switch_user: ~
 

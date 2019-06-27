@@ -5,10 +5,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 .col-md-offset-3">
-            {% if error %}
-                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-            <form class="form-signin" method="">
+
+            <form class="form-signin" action="{{ path('login') }}" method="GET">
                 <div class="text-center mb-4">
                     <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
                     <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
@@ -19,10 +17,9 @@
                            id="_username"
                            class="form-control"
                            name="_username"
-                           placeholder="Nom d'utilisateur"
+                           placeholder="Votre adresse email"
                            required
-                           autofocus
-                           value="{{last_username}}">
+                           autofocus>
                     <label for="_username">Nom d'utilisateur</label>
                 </div>
 
@@ -33,7 +30,7 @@
                            name="_password"
                            placeholder="Password"
                            required>
-                    <label for="_password">Mot de passe</label>
+                    <label for="_password"> Votre Mot de passe</label>
                 </div>
 
                 <input type="hidden" name="_csrf_token"
