@@ -2,8 +2,15 @@ security:
     encoders: # pour encoder les mots de passe
         App\Entity\User:
             algorithm: auto
+
     providers: # où se trouve les utilisateurs
+        in_memory: { memory: ~ }
         in_database:
+            entity:
+                class: App\Entity\User
+                property: mail
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
             entity:
                 class: App\Entity\User
                 property: mail
@@ -12,20 +19,23 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            anonymous: ~
             pattern:    ^/
             http_basic: ~
             user_checker:
             provider: in_database
 
             form_login:
-               login_path: login
-               check_path: login
+               login_path: app_login
+               check_path: app_login
                csrf_token_generator: security.csrf.token_manager
             logout:
-               path: logout
-               target: /
+               path: app_logout
+               target: home
             switch_user: ~
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
@@ -33,5 +43,6 @@ security:
 
     access_control:
 
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user/admin, roles: ROLE_ADMIN }
         - { path: ^/user/account, roles: ROLE_USER }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }

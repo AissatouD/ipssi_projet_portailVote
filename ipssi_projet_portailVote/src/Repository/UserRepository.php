@@ -1,12 +1,13 @@
 <?php
 
+
 namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
-use Doctrine\ORM\EntityRepository;
+
+
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,23 +15,14 @@ use Doctrine\ORM\EntityRepository;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository implements UserLoaderInterface
+
+class UserRepository extends ServiceEntityRepository
 {
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, User::class);
     }
-
-    public function loadUserByUsername($username)
-    {
-        return $this->createQueryBuilder('u')
-            ->where('u.firstname = :username OR u.email = :email')
-            ->setParameter('firstname', $username)
-            ->setParameter('mail', $username)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
@@ -47,7 +39,6 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         ;
     }
     */
-
     /*
     public function findOneBySomeField($value): ?User
     {
@@ -59,4 +50,5 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         ;
     }
     */
+
 }

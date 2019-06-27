@@ -16,6 +16,7 @@
         <span class="navbar-toggler-icon"></span>
         </button>
 
+            {% if not app.user %}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -26,18 +27,19 @@
         <a class="nav-link" href="#">Conférences</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">Céer un compte</a>
+        <a class="nav-link" href="{{ path('user_inscription') }}">Céer un compte</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">Se connecter/Inscription</a>
+        <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
         </li>
         
-        
+       {% else %}
       <li class="nav-item">
-        <a class="dropdown-menu" href="#">Se connecter/Inscription</a>
+        <a class="dropdown-menu" href="{{ path('app_logout') }}">Déconnexion</a>
       </li>
-  </div>
     </ul>
+ </div>
+     {% endif %}
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="Rechercher" placeholder="Rechercher" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>

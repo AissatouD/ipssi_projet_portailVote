@@ -12,7 +12,7 @@ class UserAccountController extends AbstractController
      */
     public function index()
     {
-        return $this->render('user_account/userAccount.twig', [
+        return $this->render('userAccount.html.twig', [
             'controller_name' => 'UserAccountController',
         ]);
     }
