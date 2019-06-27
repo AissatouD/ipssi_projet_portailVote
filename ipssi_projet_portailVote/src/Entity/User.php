@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+Use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -25,6 +26,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="4", minMessage="Votre mot de passe doit faire mininum 4 caractères")
      */
     private $password;
 
@@ -132,12 +134,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        $roles = $this->roles;
-        // donne a tout les utilisateur le role user par défault
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-
+        return ['ROLE_USER'];
     }
 
     /**

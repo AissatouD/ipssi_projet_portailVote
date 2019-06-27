@@ -1,5 +1,5 @@
 App\Entity\User:
-  Users_{1..10}:
+  user_{1..10}:
 
     __construct: false
     mail: '<email()>'

@@ -5,16 +5,15 @@ namespace App\Controller;
 
 
 
-use App\Form\UserType;
 use App\Entity\User;
 use App\Form\UserInscriptionType;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
-
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class UserInscriptionController extends AbstractController
@@ -31,34 +30,43 @@ class UserInscriptionController extends AbstractController
 
     /**
      * @param Request $request
+     * @param ObjectManager $manager
+     * @param UserPasswordEncoderInterface $encoder
      * @return Response
      * @Route("user/inscription", name="user_inscription")
      */
 
-    public function inscription( Request $request) : Response{
+    public function inscription( Request $request, ObjectManager $manager,  UserPasswordEncoderInterface $encoder ) : Response{
 
 
 
-        $newUserForm = $this->createForm(UserInscriptionType::class);
+        $user= new User();
+        $newUserForm = $this->createForm(UserInscriptionType::class, $user); // on relie les champs de l'utilisateur aux champs du formulaire
+
         $newUserForm->handleRequest($request);
         if($newUserForm->isSubmitted() && $newUserForm->isValid()) {
 
             //$password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             //$user->setPassword($password);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($newUserForm->getData());
-            $em->flush();
-            //$isOk = true;
+
+            $manager->persist($user);
+
+            $hash= $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
+
+            $manager->flush();
+
 
             return $this->redirectToRoute('login'); // pour la redirection mettre le nom de la route
         }
         return $this->render('user/userInscription.html.twig', [
             'newUserForm' => $newUserForm->createView(),
-            //'isOk' => $isOk,
+
         ]);
     }
     /**
      * @Route("/update/{id}")
+     *
      */
 
     public function update(Request $request,User $user): Response
@@ -67,8 +75,8 @@ class UserInscriptionController extends AbstractController
         $newUserForm = $this->createForm(UserType::class, $user);
         $newUserForm->handleRequest($request);
         if($newUserForm->isSubmitted() && $newUserForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
             $isOk = true;
         }
         return $this->redirectToRoute("app_user_update");
