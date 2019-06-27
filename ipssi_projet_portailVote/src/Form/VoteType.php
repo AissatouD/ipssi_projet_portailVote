@@ -6,6 +6,8 @@ use App\Entity\Vote;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class VoteType extends AbstractType
 {
@@ -14,7 +16,16 @@ class VoteType extends AbstractType
         $builder
             // ->add('idUser')
             // ->add('idMeeting')
-            ->add('note')
+            ->add('note', ChoiceType::class, [
+                'choices'  => [
+                    0 => 0,
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4,
+                    5 => 5,
+                ],
+            ]);
             // ->add('idMeetingVote')
             // ->add('idUserVote')
         ;

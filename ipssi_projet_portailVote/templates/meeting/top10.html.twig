@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <table>
+    <h2>Top 5 Conférence</h2>
+   <table>
         <thead>
         <tr>
             <th>Nom</th>
@@ -13,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for meeting in meetings %}
+        {% for meeting in topMeeting %}
         <tr>
             <td>{{ meeting.title }}</td>
             <td>{{ meeting.description }}</td>
@@ -27,5 +28,5 @@
         {% endfor %}
         </tbody>
     </table>
-  
+
 {% endblock %}

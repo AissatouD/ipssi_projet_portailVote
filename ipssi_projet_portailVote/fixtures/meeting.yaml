@@ -4,3 +4,4 @@ App\Entity\Meeting:
     description: <username()>
     date: "<dateTimeBetween('now', 'next year')>"
     location: <city()>
+    note: '<numberBetween(1, 5)>'

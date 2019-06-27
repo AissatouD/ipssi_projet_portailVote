@@ -76,8 +76,9 @@ class MeetingController extends AbstractController
     public function list(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
-<<<<<<< HEAD
+
         $meetings = $repository->findAll();
+        $topMeeting = $repository->findBy([], ['note' => 'DESC'], 10);
         
         return $this->render(
             'meeting/list.html.twig',
@@ -85,13 +86,23 @@ class MeetingController extends AbstractController
             'meetings' => $repository->findAll(),
             ]
         );
+    
     }
+        
+    /**
+    * @Route(path="/top")
+    */
+    public function top10(): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Meeting::class);
+        $topMeeting = $repository->findBy([], ['note' => 'DESC'], 10);
 
-}
-=======
-        return $this->render('meeting/list.html.twig', [
-            'meetings' => $repository->findAll()
-        ]);
+        return $this->render(
+            'meeting/top10.html.twig',
+            [
+            'topMeeting' => $topMeeting,
+            ]
+        );
     }
 
     /**
@@ -106,10 +117,12 @@ class MeetingController extends AbstractController
         $keyword = $request->request->get('search');
 
         $result = $repo->getTitle($keyword);
-dump($result);exit;
+        dump($result);exit;
         return $this->render('meeting/search.html.twig', [
             'result' => $result]);
 
     }
 }
->>>>>>> e1e992a4ee0a5e574b7664ffbf9a1bdd13f75f01
+
+
+

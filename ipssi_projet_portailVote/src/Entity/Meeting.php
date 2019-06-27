@@ -24,7 +24,7 @@ class Meeting
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
@@ -49,44 +49,77 @@ class Meeting
      */
     private $location;
 
+    /**
+     * @var float|null
+     *
+     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
+     */
+    private $note = 'NULL';
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
     public function getTitle(): ?string
     {
         return $this->title;
     }
+
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
+
     public function getDescription(): ?string
     {
         return $this->description;
     }
+
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
+
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
+
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
         return $this;
     }
+
     public function getLocation(): ?string
     {
         return $this->location;
     }
+
     public function setLocation(string $location): self
     {
         $this->location = $location;
+
         return $this;
     }
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(?float $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+
 }

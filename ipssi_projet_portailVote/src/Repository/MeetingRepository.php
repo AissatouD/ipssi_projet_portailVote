@@ -34,6 +34,15 @@ class MeetingRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public  function getTop10(): array
+    {
+        $querybuilder = $this->createQueryBuilder('meeting')
+        ->orderBy('meeting.note', 'DESC')
+        ->setMaxResults(10);
+        
+        return $querybuilder->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Meeting[] Returns an array of Meeting objects
     //  */
