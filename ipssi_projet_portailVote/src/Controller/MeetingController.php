@@ -78,19 +78,17 @@ class MeetingController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
 
         $meetings = $repository->findAll();
-<<<<<<< HEAD
-        $topMeeting = $repository->findBy([], ['note' => 'DESC'], 10);
-        
-=======
 
->>>>>>> 583882cc05e04ad81b541b02dc66fe912665777c
+        $topMeeting = $repository->findBy([], ['note' => 'DESC'], 10);
+
+
         return $this->render(
             'meeting/list.html.twig',
             [
                 'meetings' => $repository->findAll(),
             ]
         );
-<<<<<<< HEAD
+
     
     }
         
@@ -108,13 +106,12 @@ class MeetingController extends AbstractController
             'topMeeting' => $topMeeting,
             ]
         );
-=======
+
 
 
         return $this->render('meeting/list.html.twig', [
             'meetings' => $repository->findAll()
         ]);
->>>>>>> 583882cc05e04ad81b541b02dc66fe912665777c
     }
 
     /**
@@ -136,8 +133,3 @@ class MeetingController extends AbstractController
     }
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 583882cc05e04ad81b541b02dc66fe912665777c
