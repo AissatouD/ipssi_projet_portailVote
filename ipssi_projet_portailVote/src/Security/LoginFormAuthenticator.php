@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
@@ -45,13 +46,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'mail' => $request->request->get('mail'),
+            'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['mail']
+            $credentials['email']
         );
 
         return $credentials;
@@ -64,7 +65,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['mail' => $credentials['mail']]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -86,9 +87,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
 
         }
-         throw new \Exception(''.__FILE__);
 
-         //return new RedirectResponse($this->urlGenerator->generate('home'));
+           // throw new \Exception('' . __FILE__);
+            return new RedirectResponse($this->urlGenerator->generate('app_login'));
 
     }
 
