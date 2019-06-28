@@ -53,6 +53,7 @@ class UserInscriptionController extends AbstractController
 
             $hash= $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setRoles(['ROLE_USER']);
 
             $manager->flush();
 

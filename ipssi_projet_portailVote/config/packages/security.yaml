@@ -1,7 +1,7 @@
 security:
     encoders: # pour encoder les mots de passe
         App\Entity\User:
-            algorithm: auto
+            algorithm: bcrypt
 
     providers: # où se trouve les utilisateurs
         #in_memory: { memory: ~ }
