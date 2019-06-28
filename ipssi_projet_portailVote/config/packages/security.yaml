@@ -4,7 +4,7 @@ security:
             algorithm: auto
 
     providers: # où se trouve les utilisateurs
-        in_memory: { memory: ~ }
+        #in_memory: { memory: ~ }
         in_database:
             entity:
                 class: App\Entity\User
@@ -29,6 +29,7 @@ security:
                login_path: app_login
                check_path: app_login
                csrf_token_generator: security.csrf.token_manager
+               default_target_path: user_account
             logout:
                path: app_logout
                target: home

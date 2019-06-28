@@ -59,6 +59,8 @@ class UserInscriptionController extends AbstractController
 
             return $this->redirectToRoute('app_login'); // pour la redirection mettre le nom de la route
         }
+
+
         return $this->render('user/userInscription.html.twig', [
             'newUserForm' => $newUserForm->createView(),
 
