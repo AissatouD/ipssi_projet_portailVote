@@ -4,16 +4,16 @@ security:
             algorithm: auto
 
     providers: # où se trouve les utilisateurs
-        #in_memory: { memory: ~ }
+        in_memory: { memory: ~ }
         in_database:
             entity:
                 class: App\Entity\User
-                property: Username
+                property: email
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: Username
+                property: email
     firewalls: # gérer les firewalls pour la protection
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
