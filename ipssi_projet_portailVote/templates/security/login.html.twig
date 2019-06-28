@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 .col-md-offset-3">
+
+            <form class="form-signin" action="{{ path('login') }}" method="get">
+                <div class="text-center mb-4">
+                    <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="name"
+                           id="_username"
+                           class="form-control"
+                           name="_username"
+                           placeholder="Votre adresse email"
+                           required
+                           autofocus>
+                    <label for="_username">Nom d'utilisateur</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="password"
+                           id="inputPassword"
+                           class="form-control"
+                           name="_password"
+                           placeholder="Password"
+                           required>
+                    <label for="_password"> Votre Mot de passe</label>
+                </div>
+
+                <!--<input type="hidden" name="_csrf_token"
+                       value="">-->
+
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+
+
+
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

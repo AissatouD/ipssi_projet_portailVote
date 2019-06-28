@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Vote;
 use App\Form\VoteType;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,12 +32,17 @@ class VoteController extends AbstractController
             $id = $request->get("id");
             $vote = $request->request->get("vote");
             $note = $vote["note"];
+            // $this->denyAccessUnlessGranted('ROLE_USER');
+            // $user = $this->getUser();
+            // var_dump($user);
+            // exit;
     
             $newvote->setIdMeeting($id);
             $newvote->setNote($note);
             $em->persist($newvote);
             $em->flush();
             $isOk = true;
+            return $this->redirectToRoute('meetingapp_meeting_list');
         }
         return $this->render(
             'vote/add.html.twig',

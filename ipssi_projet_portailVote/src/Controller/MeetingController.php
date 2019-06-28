@@ -91,6 +91,21 @@ class MeetingController extends AbstractController
 
     
     }
+
+    /**
+     * @Route(path="/view/{id}")
+     */
+    public function view(int $id): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Meeting::class);
+        $meeting = $repository->find($id);
+        if($meeting === null) {
+            throw $this->createNotFoundException();
+        }
+        return $this->render('meeting/view.html.twig', [
+            'meeting' => $meeting
+        ]);
+    }
         
     /**
     * @Route(path="/top")
@@ -110,7 +125,7 @@ class MeetingController extends AbstractController
 
 
         return $this->render('meeting/list.html.twig', [
-            'meetings' => $repository->findAll()
+            'meetings' => $pagination
         ]);
     }
 

@@ -50,11 +50,11 @@ class Meeting
     private $location;
 
     /**
-     * @var float|null
+     * @var float
      *
-     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="note_m", type="float", precision=10, scale=0, nullable=true)
      */
-    private $note = 'NULL';
+    private $note;
 
     public function getId(): ?int
     {
