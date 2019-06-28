@@ -12,7 +12,7 @@ class VoteController extends AbstractController
      */
     public function index()
     {
-        return $this->render('vote/index.html.twig', [
+        return $this->render('vote/login.html.twig', [
             'controller_name' => 'VoteController',
         ]);
     }

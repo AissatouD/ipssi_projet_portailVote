@@ -93,7 +93,7 @@ class MeetingController extends AbstractController
         $pagination = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            7 /*limit per page*/
+            3 /*limit per page*/
         );
         return $this->render('meeting/list.html.twig', [
             'meetings' => $pagination

@@ -1,0 +1,39 @@
+security:
+    encoders: # pour encoder les mots de passe
+        App\Entity\User:
+            algorithm: auto
+    providers: # où se trouve les utilisateurs
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: mail
+    firewalls: # gérer les firewalls pour la protection
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            pattern:    ^/
+            http_basic: ~
+            user_checker:
+            provider: in_database
+
+            form_login:
+               login_path: login
+               check_path: login
+               csrf_token_generator: security.csrf.token_manager
+
+
+            logout:
+               path: logout
+               target: home
+            switch_user: ~
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+
+
+    access_control:
+
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user/account, roles: ROLE_USER }
