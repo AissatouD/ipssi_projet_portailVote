@@ -14,7 +14,6 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\HasLifecycleCallbacks()
      */
     private $id;
 
@@ -83,20 +82,14 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles = ['ROLE_ADMIN' => 1, 'ROLE_USER' => 2] ;
+        $roles[] = 'ROLE_USER';
 
-        return array($roles);
+        return array_unique($roles);
     }
-
-    /**
-     * @param array $roles
-     * @return User
-     * @ORM\PrePersist()
-     */
 
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles[2];
+        $this->roles = $roles;
 
         return $this;
     }
