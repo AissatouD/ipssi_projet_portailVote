@@ -48,12 +48,15 @@ class UserInscriptionController extends AbstractController
 
             $hash= $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setRoles(['ROLE_USER']);
 
             $manager->flush();
 
 
             return $this->redirectToRoute('app_login'); // pour la redirection mettre le nom de la route
         }
+
+
         return $this->render('user/userInscription.html.twig', [
             'newUserForm' => $newUserForm->createView(),
 

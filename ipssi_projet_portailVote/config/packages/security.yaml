@@ -1,19 +1,19 @@
 security:
     encoders: # pour encoder les mots de passe
         App\Entity\User:
-            algorithm: auto
+            algorithm: bcrypt
 
     providers: # où se trouve les utilisateurs
-        in_memory: { memory: ~ }
+        #in_memory: { memory: ~ }
         in_database:
             entity:
                 class: App\Entity\User
-                property: mail
+                property: email
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: mail
+                property: email
     firewalls: # gérer les firewalls pour la protection
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -29,6 +29,7 @@ security:
                login_path: app_login
                check_path: app_login
                csrf_token_generator: security.csrf.token_manager
+               default_target_path: user_account
             logout:
                path: app_logout
                target: home
