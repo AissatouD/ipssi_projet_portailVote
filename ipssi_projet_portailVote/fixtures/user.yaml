@@ -5,3 +5,13 @@ App\Entity\User:
     firstname: <firstname()>
     lastname: <lastname()>
     statut: <boolean()>
+    
+  
+  admin-1:
+    mail: "admin@admin.com"
+    password: "admin"
+    firstname: "admin"
+    lastname: "admin"
+    statut: <boolean()>
+    roles: ['ROLE_ADMIN']
+    

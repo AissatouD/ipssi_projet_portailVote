@@ -12,15 +12,13 @@ class UserAdminController extends AbstractController
      */
     public function index()
     {
-
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         // or add an optional message - seen by developers
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
 
-        return $this->render('user_admin/index.html.twig', [
+        return $this->render('user/userAdmin.html.twig', [
             'controller_name' => 'UserAdminController',
         ]);
     }
-
 }

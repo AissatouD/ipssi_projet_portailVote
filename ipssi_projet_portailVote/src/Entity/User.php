@@ -1,13 +1,11 @@
 <?php
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-Use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(
- * fields= {"mail"}, message= "L'email que vous avez utilisé est déjà utiliser. Connectez-vous avec en cliquant sur 'SE CONNECTER' dans le menu")
  */
 class User implements UserInterface
 {
@@ -18,13 +16,17 @@ class User implements UserInterface
      */
     private $id;
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Email()
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $mail;
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="4", minMessage="Votre mot de passe doit faire mininum 4 caractères")
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
     /**
@@ -36,14 +38,9 @@ class User implements UserInterface
      */
     private $lastname;
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $statut;
-    /**
-     *
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
     public function getId(): ?int
     {
         return $this->id;
@@ -57,15 +54,66 @@ class User implements UserInterface
         $this->mail = $mail;
         return $this;
     }
-    public function getPassword(): ?string
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->password;
+        return (string) $this->mail;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
     }
     public function setPassword(string $password): self
     {
         $this->password = $password;
         return $this;
     }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
     public function getFirstname(): ?string
     {
         return $this->firstname;
@@ -88,58 +136,10 @@ class User implements UserInterface
     {
         return $this->statut;
     }
-    public function setStatut(bool $statut): self
+
+    public function setStatut(?bool $statut): self
     {
         $this->statut = $statut;
         return $this;
-    }
-    /**
-     * Returns the roles granted to the user.
-     *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
-     */
-    public function getRoles()
-    {
-        return ['ROLE_USER'];
-    }
-    /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * This can return null if the password was not encoded using a salt.
-     *
-     * @return string|null The salt
-     */
-    public function getSalt()
-    {
-    }
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     */
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
-    }
-    /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
-     */
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
     }
 }

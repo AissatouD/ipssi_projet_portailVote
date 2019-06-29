@@ -3,8 +3,6 @@ declare(strict_types = 1);
 
 namespace App\Controller;
 
-
-
 use App\Entity\User;
 use App\Form\UserInscriptionType;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -14,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
 
 class UserInscriptionController extends AbstractController
 {
@@ -36,15 +33,13 @@ class UserInscriptionController extends AbstractController
      * @Route("user/inscription", name="user_inscription")
      */
 
-    public function inscription( Request $request, ObjectManager $manager,  UserPasswordEncoderInterface $encoder ) : Response{
-
-
-
+    public function inscription(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) : Response
+    {
         $user= new User();
         $newUserForm = $this->createForm(UserInscriptionType::class, $user); // on relie les champs de l'utilisateur aux champs du formulaire
 
         $newUserForm->handleRequest($request);
-        if($newUserForm->isSubmitted() && $newUserForm->isValid()) {
+        if ($newUserForm->isSubmitted() && $newUserForm->isValid()) {
 
             //$password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             //$user->setPassword($password);
@@ -57,7 +52,7 @@ class UserInscriptionController extends AbstractController
             $manager->flush();
 
 
-            return $this->redirectToRoute('login'); // pour la redirection mettre le nom de la route
+            return $this->redirectToRoute('app_login'); // pour la redirection mettre le nom de la route
         }
         return $this->render('user/userInscription.html.twig', [
             'newUserForm' => $newUserForm->createView(),
@@ -69,12 +64,12 @@ class UserInscriptionController extends AbstractController
      *
      */
 
-    public function update(Request $request,User $user): Response
+    public function update(Request $request, User $user): Response
     {
         $isOk = false;
         $newUserForm = $this->createForm(UserType::class, $user);
         $newUserForm->handleRequest($request);
-        if($newUserForm->isSubmitted() && $newUserForm->isValid()) {
+        if ($newUserForm->isSubmitted() && $newUserForm->isValid()) {
             $manager = $this->getDoctrine()->getManager();
             $manager->flush();
             $isOk = true;
@@ -85,6 +80,4 @@ class UserInscriptionController extends AbstractController
             'isOk' => $isOk
         ]);
     }
-
-
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MeetingRepository;
 
 /**
  * Meeting
@@ -120,6 +121,4 @@ class Meeting
 
         return $this;
     }
-
-
 }

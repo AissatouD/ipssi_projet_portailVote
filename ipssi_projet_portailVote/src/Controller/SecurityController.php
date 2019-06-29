@@ -2,60 +2,32 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/login", name="app_login")
      */
-    public function userLogin(){
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-
-        /*
-        // Pour gérer les erreur de connexion
-        $error = $authUtils->getLastAuthenticationError();
-
-        // le dernier username entrée par le user
-        $lastUsername = $authUtils->getLastUsername();
-
-        if ($error){
-            $this->addFlash('login', 'Erreur d\'authenfication, veuillez vérifier vos accès et réessayer');
-        }
-
-        // connexion en tant qu'admin
-        if (TRUE=== $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
-            return $this->redirectToRoute('user_admin');
-        }
-
-        // connexion en tant qu'utilisateur membre
-        if (TRUE=== $this->get('security.authorization_checker')->isGranted('ROLE_USER')){
-            return $this->redirectToRoute('user_account');
-        }
-
-*/
-        return $this->render('security/login.html.twig');
-
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
-     * @return mixed
-     * @Route("/logout", name="logout")
+     * @return Response
+     * @Route("/logout", name="app_logout")
      */
-
-    public function userLogout(){
-
-        // déconnexion
-        if($this->get('security.token_storage')->getToken()->getUser()){
-            $this->get('security.token_storage')->setToken(null);
-            $this->addFlash('logout', 'Logout');
-            return $this->redirectionToRoute('home');
-        }
+    public function logout()
+    {
+        return $this->render('security/login.html.twig');
     }
-
-
 }

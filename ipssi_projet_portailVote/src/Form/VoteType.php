@@ -26,8 +26,8 @@ class VoteType extends AbstractType
                     5 => 5,
                 ],
             ]);
-            // ->add('idMeetingVote')
-            // ->add('idUserVote')
+        // ->add('idMeetingVote')
+        // ->add('idUserVote')
         ;
     }
 

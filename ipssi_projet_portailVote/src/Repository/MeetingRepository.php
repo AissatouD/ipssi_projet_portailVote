@@ -26,15 +26,14 @@ class MeetingRepository extends ServiceEntityRepository
      */
     public function getTitle(?string $keyword)
     {
-
         return $this->createQueryBuilder('a')
             ->andWhere('a.title LIKE :key')
-            ->setParameter('key' , '%'.$keyword.'%')
+            ->setParameter('key', '%'.$keyword.'%')
             ->getQuery()
             ->getResult();
     }
 
-    public  function getTop10(): array
+    public function getTop10(): array
     {
         $querybuilder = $this->createQueryBuilder('meeting')
         ->orderBy('meeting.note', 'DESC')
@@ -42,6 +41,8 @@ class MeetingRepository extends ServiceEntityRepository
         
         return $querybuilder->getQuery()->getResult();
     }
+
+    
 
     // /**
     //  * @return Meeting[] Returns an array of Meeting objects
@@ -71,5 +72,4 @@ class MeetingRepository extends ServiceEntityRepository
         ;
     }
     */
-
 }

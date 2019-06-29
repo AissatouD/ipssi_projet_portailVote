@@ -88,8 +88,6 @@ class MeetingController extends AbstractController
                 'meetings' => $repository->findAll(),
             ]
         );
-
-    
     }
 
     /**
@@ -99,7 +97,7 @@ class MeetingController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
         $meeting = $repository->find($id);
-        if($meeting === null) {
+        if ($meeting === null) {
             throw $this->createNotFoundException();
         }
         return $this->render('meeting/view.html.twig', [
@@ -138,13 +136,12 @@ class MeetingController extends AbstractController
     {
         /** @var MeetingRepository $repo */
         $repo = $this->getDoctrine()->getManager()->getRepository(Meeting::class);
+        
         $keyword = $request->request->get('search');
-
+        
         $result = $repo->getTitle($keyword);
-        dump($result);exit;
+        
         return $this->render('meeting/search.html.twig', [
             'result' => $result]);
-
     }
 }
-
