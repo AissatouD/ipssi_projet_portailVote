@@ -89,7 +89,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
          //throw new \Exception(''.__FILE__);
 
-         return new RedirectResponse($this->urlGenerator->generate('home'));
+         return new RedirectResponse($this->urlGenerator->generate('user_account'));
 
     }
 
