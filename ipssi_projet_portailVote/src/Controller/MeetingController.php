@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 class MeetingController extends AbstractController
 {
     /**
-     * @Route("/add")
+     * @Route("/add", name="_add")
      */
     public function add(Request $request): Response 
     {
@@ -35,7 +35,7 @@ class MeetingController extends AbstractController
         ]);
     }
     /**
-     * @Route(path="/edit/{id}")
+     * @Route(path="/edit/{id}", name="_edit")
      */
     public function edit(Request $request, Meeting $meeting): Response
     {
@@ -54,7 +54,7 @@ class MeetingController extends AbstractController
     }
     
     /**
-     * @Route(path="/delete/{id}")
+     * @Route(path="/delete/{id}", name="_delete")
      */
     public function delete(Meeting $meeting): Response
     {
@@ -64,7 +64,7 @@ class MeetingController extends AbstractController
         return $this->redirectToRoute('meetingapp_meeting_list');
     }
      /**
-     * @Route(path="/list")
+     * @Route(path="/list", name="_list")
      */
     public function list(PaginatorInterface $paginator, Request $request): Response
     {

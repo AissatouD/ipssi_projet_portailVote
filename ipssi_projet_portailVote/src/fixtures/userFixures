@@ -1,0 +1,10 @@
+App\Entity\User:
+  user_{1}:
+
+    __construct: false
+    mail: '<email(user@admin.fr)>'
+    password: '<randomNumber($nbDigits = 8, $strict = false)>'
+    firstName (unique): '<firstName(User)>'
+    lastName (unique) : '<lastName(Admin)>'
+    statut: '<randomElements($array = array(1)>'
+    roles: "<randomElements($array = array('Admin')>"
