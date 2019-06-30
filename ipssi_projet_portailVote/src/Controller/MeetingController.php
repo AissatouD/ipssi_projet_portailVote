@@ -10,6 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
+use Swift_Mailer;
+use App\Entity\User;
+use App\Repository\UserRepository;
 /**
      * @Route("/meeting", name="meeting")
      */
@@ -20,25 +23,39 @@ class MeetingController extends AbstractController
      * @return Response
      * @Route("/add", name="_add")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, Swift_Mailer $mailer): Response
     {
         $isOk = false;
-        
         $newMeetingForm = $this->createForm(MeetingType::class);
         $newMeetingForm->handleRequest($request);
         if ($newMeetingForm->isSubmitted() && $newMeetingForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($newMeetingForm->getData());
-            $em->flush();
-            $isOk = true;
-        }
-        return $this->render(
-            'meeting/add.html.twig',
-            [
-            'meetingForm' => $newMeetingForm->createView(),
-            'isOk' => $isOk,
-            ]
-        );
+            /** @var UserRepository $repo */
+            $repo = $em->getRepository(User::class);
+            foreach ($repo->findAll() as $user) {
+        
+        $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('super_dev@example.com')
+                ->setTo($user->getMail())
+                ->setBody(
+                    "Mail bien envoyé",
+                    'text/html'
+                );
+
+                $mailer->send($message);
+                }
+
+                $em->persist($newMeetingForm->getData());
+                $em->flush();
+                $isOk = true;
+            }
+            return $this->render(
+                'meeting/add.html.twig',
+                [
+                'meetingForm' => $newMeetingForm->createView(),
+                'isOk' => $isOk,
+                ]
+            );
     }
 
     /**
@@ -84,12 +101,7 @@ class MeetingController extends AbstractController
     public function list(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
-
         $meetings = $repository->findAll();
-
-        $topMeeting = $repository->findBy([], ['note' => 'DESC'], 10);
-
-
         return $this->render(
             'meeting/list.html.twig',
             [

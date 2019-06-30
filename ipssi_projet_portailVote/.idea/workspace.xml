@@ -2,7 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5aab0b4a-7b30-4ef8-a650-9149397fa3b4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/config/packages/dev/swiftmailer.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/packages/test/swiftmailer.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/MigrationVersions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Vote.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20190627124514.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MeetingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MeetingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/VoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VoteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserInscriptionType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserInscriptionType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190624151629.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20190624151629.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/meeting/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/meeting/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/meeting/top10.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/meeting/top10.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/userInscription.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/userInscription.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,9 +89,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
               <caret line="33" selection-start-line="33" selection-end-line="33" />
-              <folding>
-                <element signature="e#959#985#1#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -96,17 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-              <folding>
-                <element signature="e#1164#1168#0#Twig" expanded="true" />
-                <element signature="e#1325#1337#0#Twig" expanded="true" />
-                <element signature="e#1306#1318#0#Twig" expanded="true" />
-                <element signature="e#1442#1453#0#Twig" expanded="true" />
-                <element signature="e#1614#1630#0#Twig" expanded="true" />
-                <element signature="e#1903#1912#0#Twig" expanded="true" />
-                <element signature="e#2074#2084#0#Twig" expanded="true" />
-              </folding>
+            <state relative-caret-position="375">
+              <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -194,7 +208,6 @@
         <option value="$PROJECT_DIR$/fixtures/users" />
         <option value="$PROJECT_DIR$/fixtures/user" />
         <option value="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/symfony.lock" />
         <option value="$PROJECT_DIR$/fixtures/userFixures" />
         <option value="$PROJECT_DIR$/src/Form/UserInscriptionType.php" />
@@ -208,7 +221,6 @@
         <option value="$PROJECT_DIR$/src/Controller/UserAdminController.php" />
         <option value="$PROJECT_DIR$/src/Controller/UserAccountController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Meeting.php" />
-        <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Controller/UserInscriptionController.php" />
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" />
@@ -221,6 +233,8 @@
         <option value="$PROJECT_DIR$/config/packages/framework.yaml" />
         <option value="$PROJECT_DIR$/templates/security/login.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/src/Entity/User.php" />
       </list>
     </option>
   </component>
@@ -478,12 +492,12 @@
       <workItem from="1561624139496" duration="8552000" />
       <workItem from="1561657734465" duration="11902000" />
       <workItem from="1561802819284" duration="450000" />
-      <workItem from="1561881562907" duration="4102000" />
+      <workItem from="1561881562907" duration="4820000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91199000" />
+    <option name="totallyTimeSpent" value="91917000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -833,17 +847,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-          <folding>
-            <element signature="e#1164#1168#0#Twig" expanded="true" />
-            <element signature="e#1325#1337#0#Twig" expanded="true" />
-            <element signature="e#1306#1318#0#Twig" expanded="true" />
-            <element signature="e#1442#1453#0#Twig" expanded="true" />
-            <element signature="e#1614#1630#0#Twig" expanded="true" />
-            <element signature="e#1903#1912#0#Twig" expanded="true" />
-            <element signature="e#2074#2084#0#Twig" expanded="true" />
-          </folding>
+        <state relative-caret-position="375">
+          <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -851,9 +856,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#959#985#1#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

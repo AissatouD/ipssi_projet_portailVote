@@ -18,12 +18,7 @@ class UserInscriptionType extends AbstractType
             ->add('password', PasswordType::class)
             ->add('firstname')
             ->add('lastname')
-            ->add('statut')
-            /*->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'ROLE_ADMIN' => 'Admin',
-                    'ROLE_USER' => 'User']
-            ])*/
+            
         ;
     }
 

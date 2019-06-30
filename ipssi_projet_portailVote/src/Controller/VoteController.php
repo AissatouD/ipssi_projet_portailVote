@@ -32,13 +32,11 @@ class VoteController extends AbstractController
             $id = $request->get("id");
             $vote = $request->request->get("vote");
             $note = $vote["note"];
-            // $this->denyAccessUnlessGranted('ROLE_USER');
-            // $user = $this->getUser();
-            // var_dump($user);
-            // exit;
-    
+            $this->denyAccessUnlessGranted('ROLE_USER');
+            $user = $this->getUser()->getId();
             $newvote->setIdMeeting($id);
             $newvote->setNote($note);
+            $newvote->setIdUser($user);
             $em->persist($newvote);
             $em->flush();
             $isOk = true;
@@ -52,10 +50,4 @@ class VoteController extends AbstractController
             ]
         );
     }
-    // public function index()
-    // {
-    //     return $this->render('vote/index.html.twig', [
-    //         'controller_name' => 'VoteController',
-    //     ]);
-    // }
 }
