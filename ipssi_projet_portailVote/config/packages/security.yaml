@@ -32,7 +32,7 @@ security:
                default_target_path: user_account
             logout:
                path: app_logout
-               target: home
+               target: app_login
             switch_user: ~
             guard:
                 authenticators:

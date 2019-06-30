@@ -93,12 +93,7 @@ class MeetingController extends AbstractController
     public function list(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
-
         $meetings = $repository->findAll();
-
-        $topMeeting = $repository->findBy([], ['note' => 'DESC'], 10);
-
-
         return $this->render(
             'meeting/list.html.twig',
             [
@@ -130,16 +125,8 @@ class MeetingController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
         $topMeeting = $repository->findBy([], ['note' => 'DESC'], 10);
 
-        $pagination = $paginator->paginate(
-            $repository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            3 /*limit per page*/
-        );
-
-
-
         return $this->render('meeting/list.html.twig', [
-            'meetings' => $pagination
+            'meetings' => $topMeeting
         ]);
     
 
