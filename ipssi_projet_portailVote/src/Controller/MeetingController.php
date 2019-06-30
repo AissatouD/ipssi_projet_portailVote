@@ -93,7 +93,7 @@ class MeetingController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($meeting);
         $em->flush();
-        return $this->redirectToRoute('meetingapp_meeting_list');
+        return $this->redirectToRoute('meeting_list');
     }
     /**
     * @Route(path="/list" ,name="_list")
