@@ -23,6 +23,15 @@
         <a class="nav-link" href="{{ path('home') }}">Acceuil <span class="sr-only">(current)</span>
         </a>
         </li>
+            {% if app.user %}
+                {% if is_granted('ROLE_USER') %}
+                 <li class="nav-item">
+                  <a class="nav-link" href="{{ path('user_account') }}">Mon espace membre</a>
+                  </li>
+                  {% endif %}
+            {% endif %}
+
+
         <li class="nav-item">
         <a class="nav-link" href="{{ path('meeting_list') }}">Conférences</a>
         </li>
@@ -50,6 +59,7 @@
          <li class="nav-item">
          <a class="nav-link" href="{{ path('user_admin') }}">Gérer les utilisateurs</a>
          </li>
+
 
             {% endif %}
     </ul>
