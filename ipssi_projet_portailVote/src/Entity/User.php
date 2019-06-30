@@ -37,10 +37,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $lastname;
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $statut;
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -132,14 +129,5 @@ class User implements UserInterface
         $this->lastname = $lastname;
         return $this;
     }
-    public function getStatut(): ?bool
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(?bool $statut): self
-    {
-        $this->statut = $statut;
-        return $this;
-    }
+    
 }
