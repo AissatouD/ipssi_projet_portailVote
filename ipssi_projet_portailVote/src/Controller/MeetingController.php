@@ -19,7 +19,9 @@ use App\Repository\UserRepository;
 class MeetingController extends AbstractController
 {
     /**
-     * @Route("/add")
+     * @param Request $request
+     * @return Response
+     * @Route("/add", name="_add")
      */
     public function add(Request $request, Swift_Mailer $mailer): Response
     {
@@ -55,8 +57,12 @@ class MeetingController extends AbstractController
                 ]
             );
     }
+
     /**
-     * @Route(path="/edit/{id}") 
+     * @param Request $request
+     * @param Meeting $meeting
+     * @return Response
+     * @Route(path="/edit/{id}", name="_edit")
      */
     public function edit(Request $request, Meeting $meeting): Response
     {
@@ -76,9 +82,11 @@ class MeetingController extends AbstractController
             ]
         );
     }
-    
+
     /**
-     * @Route(path="/delete/{id}")
+     * @param Meeting $meeting
+     * @return Response
+     * @Route(path="/delete/{id}", name="_delete"
      */
     public function delete(Meeting $meeting): Response
     {
@@ -88,7 +96,7 @@ class MeetingController extends AbstractController
         return $this->redirectToRoute('meetingapp_meeting_list');
     }
     /**
-    * @Route(path="/list")
+    * @Route(path="/list" ,name="_list")
     */
     public function list(): Response
     {
@@ -103,7 +111,7 @@ class MeetingController extends AbstractController
     }
 
     /**
-     * @Route(path="/view/{id}")
+     * @Route(path="/view/{id}", name="_view")
      */
     public function view(int $id): Response
     {
@@ -118,18 +126,40 @@ class MeetingController extends AbstractController
     }
         
     /**
-    * @Route(path="/top")
+    * @Route(path="/top", name="_top")
     */
     public function top10(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
         $topMeeting = $repository->findBy([], ['note' => 'DESC'], 10);
 
-        return $this->render('meeting/list.html.twig', [
-            'meetings' => $topMeeting
-        ]);
-    
+        return $this->render(
+            'meeting/top10.html.twig',
+            [
+                'topMeeting' => $topMeeting,
+            ]
+        );
 
+    }
+
+
+
+        /*return $this->render('meeting/list.html.twig', [
+            'meetings' => $pagination
+        ]);
+    }*/
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("/search", name="search")
+     */
+    public function searchAction(Request $request)
+    {
+        /** @var MeetingRepository $repo */
+        $repo = $this->getDoctrine()->getManager()->getRepository(Meeting::class);
+        
+        $keyword = $request->request->get('search');
         
         $result = $repo->getTitle($keyword);
         
