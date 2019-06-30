@@ -19,33 +19,16 @@
             <td>{{ meeting.description }}</td>
             <td>{{ meeting.date|date("d/m/Y") }}</td>
             <td>{{ meeting.location}}</td>
-<<<<<<< HEAD
             <td>{{ meeting.note}}/5</td>
             <td><a href="{{ path('voteapp_vote_add', {id: meeting.id}) }}">Noter</a></td>
-=======
-            <td>{{ meeting.note}}</td>
-            <td><a href="{{ path('vote_add', {id: meeting.id}) }}">Noter</a></td>
-            <td><a href="{{ path('meeting_edit', {id: meeting.id}) }}">Edit</a></td>
-            <td><a href="{{ path('meeting_delete', {id: meeting.id}) }}">Delete</a></td>
-        </tr>
->>>>>>> 076d46fc94f82ec478326c9f2b3c83e83b6a1739
         {% endfor %}
         </tbody>
     </table>
 
-<<<<<<< HEAD
 <div class="container">
    <div class="pagination">
       {{ knp_pagination_render(pagination) }}
    </div>
 </div>
-=======
-    <div class="container">
-        <div class="pagination">
-            {{ knp_pagination_render(pagination) }}
-        </div>
-    </div>
-
->>>>>>> 076d46fc94f82ec478326c9f2b3c83e83b6a1739
    
 {% endblock %}
