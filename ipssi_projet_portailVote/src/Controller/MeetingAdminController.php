@@ -36,8 +36,7 @@ class MeetingAdminController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             /** @var UserRepository $repo */
             $repo = $em->getRepository(User::class);
-            foreach($repo->findAll() as $user)
-            {
+            foreach ($repo->findAll() as $user) {
                 $message = (new Swift_Message('Hello yooyo'))
                     ->setFrom('dev-web@example.com')
                     ->setTo($user->getMail())
@@ -54,8 +53,8 @@ class MeetingAdminController extends AbstractController
             $isOk = true;
         }
         return $this->render(
-                    'meeting/add.html.twig',
-                    [
+            'meeting/add.html.twig',
+            [
                     'meetingForm' => $newMeetingForm->createView(),
                     'isOk' => $isOk,
                     ]
@@ -79,8 +78,8 @@ class MeetingAdminController extends AbstractController
             $isOk = true;
         }
         return $this->render(
-                'meeting/edit.html.twig',
-                [
+            'meeting/edit.html.twig',
+            [
                 'meetingForm' => $newMeetingForm->createView(),
                 'isOk' => $isOk
                 ]
@@ -107,8 +106,8 @@ class MeetingAdminController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
         $meetings = $repository->findAll();
         return $this->render(
-                'meeting_admin/list.html.twig',
-                [
+            'meeting_admin/list.html.twig',
+            [
                     'meetings' => $repository->findAll(),
                 ]
             );
@@ -138,8 +137,8 @@ class MeetingAdminController extends AbstractController
         $topMeeting = $repository->findBy([], ['note' => 'DESC'], 10);
     
         return $this->render(
-                'meeting/top10.html.twig',
-                [
+            'meeting/top10.html.twig',
+            [
                     'topMeeting' => $topMeeting,
                 ]
             );
@@ -167,4 +166,3 @@ class MeetingAdminController extends AbstractController
                 'result' => $result]);
     }
 }
-    

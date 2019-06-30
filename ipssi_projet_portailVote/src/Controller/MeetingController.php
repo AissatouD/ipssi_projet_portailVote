@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Swift_Mailer;
 use App\Entity\User;
 use App\Repository\UserRepository;
+
 /**
      * @Route("/meeting", name="meeting")
      */
@@ -25,12 +26,12 @@ class MeetingController extends AbstractController
     */
     public function list(PaginatorInterface $paginator, Request $request): Response
     {
-
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
         $pagination = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            3 );/*limit per page*/
+            3
+        );/*limit per page*/
         $meetings = $repository->findAll();
         return $this->render(
             'meeting/list.html.twig',
@@ -47,18 +48,17 @@ class MeetingController extends AbstractController
          * @return Response
          * @Route("/add", name="_add")
          */
-        public function add(Request $request, Swift_Mailer $mailer): Response
-        {
-            $isOk = false;
-            $newMeetingForm = $this->createForm(MeetingType::class);
-            $newMeetingForm->handleRequest($request);
-            if ($newMeetingForm->isSubmitted() && $newMeetingForm->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                /** @var UserRepository $repo */
-                $repo = $em->getRepository(User::class);
-                foreach($repo->findAll() as $user)
-                {
-                    $message = (new Swift_Message('Hello yooyo'))
+    public function add(Request $request, Swift_Mailer $mailer): Response
+    {
+        $isOk = false;
+        $newMeetingForm = $this->createForm(MeetingType::class);
+        $newMeetingForm->handleRequest($request);
+        if ($newMeetingForm->isSubmitted() && $newMeetingForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            /** @var UserRepository $repo */
+            $repo = $em->getRepository(User::class);
+            foreach ($repo->findAll() as $user) {
+                $message = (new Swift_Message('Hello yooyo'))
                         ->setFrom('dev-web@example.com')
                         ->setTo($user->getMail())
                         ->setBody(
@@ -66,21 +66,21 @@ class MeetingController extends AbstractController
                             'text/html'
                         );
         
-                    $mailer->send($message);
-                }
-        
-                $em->persist($newMeetingForm->getData());
-                $em->flush();
-                $isOk = true;
+                $mailer->send($message);
             }
-            return $this->render(
-                        'meeting/add.html.twig',
-                        [
+        
+            $em->persist($newMeetingForm->getData());
+            $em->flush();
+            $isOk = true;
+        }
+        return $this->render(
+                'meeting/add.html.twig',
+                [
                         'meetingForm' => $newMeetingForm->createView(),
                         'isOk' => $isOk,
                         ]
                     );
-        }
+    }
 
     /**
      * @Route(path="/view/{id}", name="_view")
@@ -111,7 +111,6 @@ class MeetingController extends AbstractController
                 'topMeeting' => $topMeeting,
             ]
         );
-
     }
 
 

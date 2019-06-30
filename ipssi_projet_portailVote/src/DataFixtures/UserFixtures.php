@@ -9,7 +9,6 @@ use Faker;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
-
 {
     private $encoder;
 
@@ -20,23 +19,21 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 10; $i++){
+        for ($i = 0; $i < 10; $i++) {
+            $userAdmin = new User();
+            $userAdmin-> setFirstname($faker->firstName());
+            $userAdmin-> setLastname($faker->lastName);
+            $userAdmin-> setMail($faker->email);
 
-         $userAdmin = new User();
-         $userAdmin-> setFirstname($faker->firstName());
-         $userAdmin-> setLastname($faker->lastName);
-         $userAdmin-> setMail($faker->email);
+            $password= $this->encoder->encodePassword($userAdmin, 'useruser');
+            $userAdmin-> setPassword($password);
+            $userAdmin-> setRoles(['ROLE_USER']);
+            $userAdmin-> setStatut(true);
+            $manager->persist($userAdmin);
 
-         $password= $this->encoder->encodePassword($userAdmin, 'useruser');
-         $userAdmin-> setPassword($password);
-         $userAdmin-> setRoles(['ROLE_USER']);
-         $userAdmin-> setStatut(true);
-         $manager->persist($userAdmin);
-
-        $manager->flush();
+            $manager->flush();
         }
     }
 }

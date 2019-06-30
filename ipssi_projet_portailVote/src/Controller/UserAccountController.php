@@ -20,6 +20,4 @@ class UserAccountController extends AbstractController
             'controller_name' => 'UserAccountController',
         ]);
     }
-
-
 }

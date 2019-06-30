@@ -14,9 +14,7 @@ class MeetingFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-
         for ($i = 0; $i < 100; $i++) {
-
             $faker = Faker\Factory::create('fr_FR'); // create a French faker
             $meetingFixture = new Meeting();
             $meetingFixture->setTitle($faker->words(3, true));
@@ -27,7 +25,7 @@ class MeetingFixtures extends Fixture
         }
 
 
-            $manager->persist($meetingFixture);
+        $manager->persist($meetingFixture);
 
         $manager->flush();
     }

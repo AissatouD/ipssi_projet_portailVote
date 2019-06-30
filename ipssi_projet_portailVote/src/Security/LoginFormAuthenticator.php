@@ -1,5 +1,6 @@
 <?php
 namespace App\Security;
+
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,6 +17,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
@@ -74,8 +76,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
 
 
-         //throw new \Exception(''.__FILE__);
-         return new RedirectResponse($this->urlGenerator->generate('user_account'));
+        //throw new \Exception(''.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('user_account'));
     }
     protected function getLoginUrl()
     {
