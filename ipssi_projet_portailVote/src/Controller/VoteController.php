@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 class VoteController extends AbstractController
 {
     /**
-     * @Route("/add")
+     * @Route("/add", name="_add")
      */
     public function add(Request $request): Response
     {

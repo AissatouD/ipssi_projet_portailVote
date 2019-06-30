@@ -9,20 +9,33 @@
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
             <link rel="stylesheet" href="{{ asset('css/styles.css') }}"/>
         {% endblock %}
+    </head>
+    <body>
 
+        {% block header %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
 
-            
+
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-        <a class="nav-link" href="#">Acceuil <span class="sr-only">(current)</span> 
-        <a>
+        <a class="nav-link" href="{{ path('home') }}">Acceuil <span class="sr-only">(current)</span>
+        </a>
         </li>
+            {% if app.user %}
+                {% if is_granted('ROLE_USER') %}
+                 <li class="nav-item">
+                  <a class="nav-link" href="{{ path('user_account') }}">Mon espace membre</a>
+                  </li>
+                  {% endif %}
+            {% endif %}
+
+
         <li class="nav-item">
         <a class="nav-link" href="{{ path('meeting_list') }}">Conférences</a>
         </li>
@@ -30,13 +43,16 @@
         <li class="nav-item">
         <a class="nav-link" href="{{ path('meeting_top') }}">Top 10</a>
         </li>
+          {% if not app.user %}
         <li class="nav-item">
         <a class="nav-link" href="{{ path('user_inscription') }}">Céer un compte</a>
         </li>
+
         <li class="nav-item">
         <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
         </li>
         
+<<<<<<< HEAD
        {% if  app.user %}
        <li class="nav-item">
         <a class="nav-link" href="{{ path('meeting_admin_list') }}">Admin</a>
@@ -45,9 +61,25 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
       </li>
+=======
+       {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}">Déconnexion</a>
+            </li>
+          {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+
+         <li class="nav-item">
+         <a class="nav-link" href="{{ path('user_admin') }}">Gérer les utilisateurs</a>
+         </li>
+            {% endif %}
+
+>>>>>>> 076d46fc94f82ec478326c9f2b3c83e83b6a1739
     </ul>
  </div>
-     {% endif %}
+
+
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="Rechercher" name="search" placeholder="Rechercher" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
@@ -55,14 +87,10 @@
   </div>
 </nav>
 
-        {% block navbar %}
-            
-        {% endblock %}
-
-    </head>
-    <body>
+  {% endblock %}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+
 
         {% block footer %}
             {% block script%}

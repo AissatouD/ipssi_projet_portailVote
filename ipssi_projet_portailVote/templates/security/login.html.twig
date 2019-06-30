@@ -3,6 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+<body class="text-center">
  <div class="container">
      <div class="row">
          <div class="col-md-6 .col-md-offset-3">
@@ -12,11 +13,11 @@
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label for="inputMail" class="sr-only">Mail</label>
-            <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" placeholder="Mail" required autofocus>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
+            <label for="inputMail" class="sr-only">Adresse email</label>
+            <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" placeholder="Email" required autofocus>
+            <label for="inputPassword" class="sr-only">Mot de passe</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
 
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
@@ -25,10 +26,11 @@
 
 
             <button class="btn btn-lg btn-primary" type="submit">
-                Sign in
+                Connexion
             </button>
         </form>
          </div><!-- fin col-md-6-->
      </div> <!-- fin div row -->
  </div> <!-- fin div container -->
+</body>
 {% endblock %}

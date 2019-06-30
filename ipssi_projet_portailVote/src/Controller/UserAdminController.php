@@ -17,7 +17,7 @@ class UserAdminController extends AbstractController
         // or add an optional message - seen by developers
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
 
-        return $this->render('user/userAdmin.html.twig', [
+        return $this->render('admin/userAdmin.html.twig', [
             'controller_name' => 'UserAdminController',
         ]);
     }

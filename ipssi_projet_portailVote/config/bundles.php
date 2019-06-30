@@ -18,5 +18,9 @@ return [
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
+<<<<<<< HEAD
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
+=======
+
+>>>>>>> 076d46fc94f82ec478326c9f2b3c83e83b6a1739
 ];

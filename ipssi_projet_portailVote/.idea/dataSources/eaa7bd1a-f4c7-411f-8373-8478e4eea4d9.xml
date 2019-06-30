@@ -1383,85 +1383,93 @@
     </column>
     <column id="342" parent="330" name="mail">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(180)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="343" parent="330" name="password">
+    <column id="343" parent="330" name="roles">
       <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="344" parent="330" name="firstname">
-      <Position>4</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="345" parent="330" name="lastname">
-      <Position>5</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="346" parent="330" name="statut">
-      <Position>6</Position>
-      <DataType>tinyint(1)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="347" parent="330" name="roles">
-      <Position>7</Position>
       <DataType>longtext|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
       <Collation>utf8mb4_bin</Collation>
     </column>
-    <key id="348" parent="330" name="PRIMARY">
+    <column id="344" parent="330" name="password">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="345" parent="330" name="firstname">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="346" parent="330" name="lastname">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="347" parent="330" name="statut">
+      <Position>7</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="348" parent="330" name="UNIQ_8D93D6495126AC48">
+      <ColNames>mail</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="349" parent="330" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <check id="349" parent="330" name="roles">
+    <key id="350" parent="330" name="UNIQ_8D93D6495126AC48">
+      <ColNames>mail</ColNames>
+      <UnderlyingIndexName>UNIQ_8D93D6495126AC48</UnderlyingIndexName>
+    </key>
+    <check id="351" parent="330" name="roles">
       <Predicate>json_valid(`roles`)</Predicate>
     </check>
-    <column id="350" parent="331" name="id">
+    <column id="352" parent="331" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="351" parent="331" name="id_user">
+    <column id="353" parent="331" name="id_user">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="352" parent="331" name="id_meeting">
+    <column id="354" parent="331" name="id_meeting">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="353" parent="331" name="note">
+    <column id="355" parent="331" name="note">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="354" parent="331" name="id_user_user_vote">
+    <column id="356" parent="331" name="id_user_user_vote">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="355" parent="331" name="id_meeting_vote_meeting">
+    <column id="357" parent="331" name="id_meeting_vote_meeting">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="356" parent="331" name="PRIMARY">
+    <key id="358" parent="331" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

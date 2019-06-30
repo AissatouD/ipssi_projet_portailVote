@@ -3,11 +3,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Serializable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, Serializable
 {
     /**
      * @ORM\Id()
@@ -37,7 +38,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $lastname;
-    
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $statut;
     public function getId(): ?int
     {
         return $this->id;
@@ -129,5 +133,48 @@ class User implements UserInterface
         $this->lastname = $lastname;
         return $this;
     }
-    
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(?bool $statut): self
+    {
+        $this->statut = $statut;
+        return $this;
+    }
+
+    /**
+     * String representation of object
+     * @link https://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->mail,
+            $this->password
+
+        ]);
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+       list(
+           $this->id,
+           $this->mail,
+           $this->password
+       ) = unserialize($serialized, ['allowed_classes' =>false]);
+    }
 }

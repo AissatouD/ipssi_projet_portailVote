@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Meeting;
 use App\Form\MeetingType;
 use App\Repository\MeetingRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,6 +26,7 @@ class MeetingController extends AbstractController
     */
     public function list(PaginatorInterface $paginator, Request $request): Response
     {
+
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
         $pagination = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
