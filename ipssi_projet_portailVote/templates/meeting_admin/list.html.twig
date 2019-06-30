@@ -1,8 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Top 10 Conférence</h2>
-   <table>
+    <table>
         <thead>
         <tr>
             <th>Nom</th>
@@ -14,18 +13,20 @@
         </tr>
         </thead>
         <tbody>
-        {% for meeting in topMeeting %}
+        {% for meeting in meetings %}
         <tr>
             <td>{{ meeting.title }}</td>
             <td>{{ meeting.description }}</td>
-            <td>{{ meeting.date|date("m/d/Y") }}</td>
+            <td>{{ meeting.date|date("d/m/Y") }}</td>
             <td>{{ meeting.location}}</td>
             <td>{{ meeting.note}}/5</td>
             <td><a href="{{ path('voteapp_vote_add', {id: meeting.id}) }}">Noter</a></td>
-           
+            <td><a href="{{ path('meeting_admin_edit', {id: meeting.id}) }}">Edit</a></td>
+            <td><a href="{{ path('meeting_admin_delete', {id: meeting.id}) }}">Delete</a></td>                 
         </tr>
         {% endfor %}
         </tbody>
     </table>
 
+   
 {% endblock %}

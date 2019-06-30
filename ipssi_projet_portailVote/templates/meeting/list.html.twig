@@ -21,9 +21,6 @@
             <td>{{ meeting.location}}</td>
             <td>{{ meeting.note}}/5</td>
             <td><a href="{{ path('voteapp_vote_add', {id: meeting.id}) }}">Noter</a></td>
-            <td><a href="{{ path('meeting_edit', {id: meeting.id}) }}">Edit</a></td>
-            <td><a href="{{ path('meeting_delete', {id: meeting.id}) }}">Delete</a></td>
-        </tr>
         {% endfor %}
         </tbody>
     </table>
