@@ -16,7 +16,9 @@ use Symfony\Component\HttpFoundation\Request;
 class MeetingController extends AbstractController
 {
     /**
-     * @Route("/add")
+     * @param Request $request
+     * @return Response
+     * @Route("/add", name="_add")
      */
     public function add(Request $request): Response
     {
@@ -38,8 +40,12 @@ class MeetingController extends AbstractController
             ]
         );
     }
+
     /**
-     * @Route(path="/edit/{id}")
+     * @param Request $request
+     * @param Meeting $meeting
+     * @return Response
+     * @Route(path="/edit/{id}", name="_edit")
      */
     public function edit(Request $request, Meeting $meeting): Response
     {
@@ -59,9 +65,11 @@ class MeetingController extends AbstractController
             ]
         );
     }
-    
+
     /**
-     * @Route(path="/delete/{id}")
+     * @param Meeting $meeting
+     * @return Response
+     * @Route(path="/delete/{id}", name="_delete"
      */
     public function delete(Meeting $meeting): Response
     {
@@ -71,7 +79,7 @@ class MeetingController extends AbstractController
         return $this->redirectToRoute('meetingapp_meeting_list');
     }
     /**
-    * @Route(path="/list")
+    * @Route(path="/list" ,name="_list")
     */
     public function list(): Response
     {
@@ -91,7 +99,7 @@ class MeetingController extends AbstractController
     }
 
     /**
-     * @Route(path="/view/{id}")
+     * @Route(path="/view/{id}", name="_view")
      */
     public function view(int $id): Response
     {
@@ -106,7 +114,7 @@ class MeetingController extends AbstractController
     }
         
     /**
-    * @Route(path="/top")
+    * @Route(path="/top", name="_top")
     */
     public function top10(): Response
     {
@@ -116,21 +124,23 @@ class MeetingController extends AbstractController
         return $this->render(
             'meeting/top10.html.twig',
             [
-            'topMeeting' => $topMeeting,
+                'topMeeting' => $topMeeting,
             ]
         );
 
-
-
-        return $this->render('meeting/list.html.twig', [
-            'meetings' => $pagination
-        ]);
     }
 
+
+
+        /*return $this->render('meeting/list.html.twig', [
+            'meetings' => $pagination
+        ]);
+    }*/
+
     /**
-     * @Route("/search", name="search")
      * @param Request $request
      * @return Response
+     * @Route("/search", name="search")
      */
     public function searchAction(Request $request)
     {
