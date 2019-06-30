@@ -24,7 +24,11 @@
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">Conférences</a>
+        <a class="nav-link" href="{{ path('meetingapp_meeting_list') }}">Conférences</a>
+        </li>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{{ path('meetingapp_meeting_top10') }}">Top 10</a>
         </li>
           {% if not app.user %}
         <li class="nav-item">
@@ -53,7 +57,7 @@
 
 
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="Rechercher" placeholder="Rechercher" aria-label="Search">
+      <input class="form-control mr-sm-2" type="Rechercher" name="search" placeholder="Rechercher" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
     </form>
 </nav>

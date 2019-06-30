@@ -13,13 +13,13 @@
         </tr>
         </thead>
         <tbody>
-        {% for meeting in meetings %}
+        {% for res in result %}
         <tr>
-            <td>{{ meeting.title }}</td>
-            <td>{{ meeting.description }}</td>
-            <td>{{ meeting.date|date("d/m/Y") }}</td>
-            <td>{{ meeting.location}}</td>
-            <td>{{ meeting.note}}</td>
+            <td>{{ res.title }}</td>
+            <td>{{ res.description }}</td>
+            <td>{{ res.date|date("d/m/Y") }}</td>
+            <td>{{ res.location}}</td>
+            <td>{{ res.note}}</td>
             <td><a href="{{ path('voteapp_vote_add', {id: meeting.id}) }}">Noter</a></td>
             <td><a href="{{ path('meeting_edit', {id: meeting.id}) }}">Edit</a></td>
             <td><a href="{{ path('meeting_delete', {id: meeting.id}) }}">Delete</a></td>

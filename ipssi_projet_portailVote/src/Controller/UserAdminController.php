@@ -12,7 +12,6 @@ class UserAdminController extends AbstractController
      */
     public function index()
     {
-
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         // or add an optional message - seen by developers
@@ -22,5 +21,4 @@ class UserAdminController extends AbstractController
             'controller_name' => 'UserAdminController',
         ]);
     }
-
 }
