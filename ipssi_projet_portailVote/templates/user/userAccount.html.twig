@@ -9,10 +9,12 @@
 
     <div class="btn-group-vertical" data-toggle="buttons">
         <button type="button" class="btn btn-primary" onclick="document.location.href=' {{ path('meeting_add') }}'">Ajouter une conférence</button>
+        <button type="button" class="btn btn-primary" onclick="document.location.href=' {{ path('vote_add') }}'">Voter </button>
+
         <button type="button" class="btn btn-primary" aria-pressed="false" onclick="document.location.href=' {{ path('meeting_list') }}'">Modifier mes conférences</button>
 
         <button type="button" class="btn btn-primary" onclick="document.location.href=' {{ path('meeting_list') }}'">Voir tout</button>
-        <button type="button" class="btn btn-primary" onclick="document.location.href=' {{ path('meeting_list') }}'">TOP 10 </button>
+        <button type="button" class="btn btn-primary" onclick="document.location.href=' {{ path('meeting_top') }}'">TOP 10 </button>
 
     </div>
 
