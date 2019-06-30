@@ -29,7 +29,7 @@ class MeetingController extends AbstractController
         $pagination = $paginator->paginate(
             $repository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            3 );/*limit per page*/
+            10 );/*limit per page*/
         $meetings = $repository->findAll();
         return $this->render(
             'meeting/list.html.twig',

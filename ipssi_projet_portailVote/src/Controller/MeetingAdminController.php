@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 use Swift_Mailer;
+use Swift_Message;
 use App\Entity\User;
 use App\Repository\UserRepository;
 
@@ -35,12 +36,13 @@ class MeetingAdminController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             /** @var UserRepository $repo */
             $repo = $em->getRepository(User::class);
-            foreach ($repo->findAll() as $user) {
-                $message = (new \Swift_Message('Hello Email'))
-                    ->setFrom('super_dev@example.com')
+            foreach($repo->findAll() as $user)
+            {
+                $message = (new Swift_Message('Hello yooyo'))
+                    ->setFrom('dev-web@example.com')
                     ->setTo($user->getMail())
                     ->setBody(
-                        "Mail bien envoyé",
+                        " une nouvelle conférence wow!!  ",
                         'text/html'
                     );
     
