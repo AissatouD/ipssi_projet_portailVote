@@ -122,7 +122,7 @@ class MeetingAdminController extends AbstractController
         if ($meeting === null) {
             throw $this->createNotFoundException();
         }
-        return $this->render('meeting/view.html.twig', [
+        return $this->render('meeting_admin/view.html.twig', [
                 'meeting' => $meeting
             ]);
     }

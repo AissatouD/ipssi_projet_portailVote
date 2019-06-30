@@ -15,7 +15,7 @@
         <tbody>
         {% for meeting in meetings %}
         <tr>
-            <td>{{ meeting.title }}</td>
+            <td><a href="{{ path('meeting_view', {id: meeting.id}) }}">{{ meeting.title }}</a></td>
             <td>{{ meeting.description }}</td>
             <td>{{ meeting.date|date("d/m/Y") }}</td>
             <td>{{ meeting.location}}</td>
@@ -25,5 +25,10 @@
         </tbody>
     </table>
 
+<div class="container">
+   <div class="pagination">
+      {{ knp_pagination_render(pagination) }}
+   </div>
+</div>
    
 {% endblock %}

@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 use Swift_Mailer;
 use App\Entity\User;
@@ -22,13 +23,18 @@ class MeetingController extends AbstractController
     /**
     * @Route(path="/list" ,name="_list")
     */
-    public function list(): Response
+    public function list(PaginatorInterface $paginator, Request $request): Response
     {
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
+        $pagination = $paginator->paginate(
+            $repository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            3 );/*limit per page*/
         $meetings = $repository->findAll();
         return $this->render(
             'meeting/list.html.twig',
             [
+                'pagination'=>$pagination,
                 'meetings' => $repository->findAll(),
             ]
         );
