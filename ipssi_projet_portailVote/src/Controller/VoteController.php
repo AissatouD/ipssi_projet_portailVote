@@ -40,7 +40,7 @@ class VoteController extends AbstractController
             $em->persist($newvote);
             $em->flush();
             $isOk = true;
-            return $this->redirectToRoute('meetingapp_meeting_list');
+            return $this->redirectToRoute('meeting_list');
         }
         return $this->render(
             'vote/add.html.twig',

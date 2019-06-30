@@ -86,14 +86,14 @@ class MeetingController extends AbstractController
     /**
      * @param Meeting $meeting
      * @return Response
-     * @Route(path="/delete/{id}", name="_delete"
+     * @Route(path="/delete/{id}", name="_delete")
      */
     public function delete(Meeting $meeting): Response
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($meeting);
         $em->flush();
-        return $this->redirectToRoute('meetingapp_meeting_list');
+        return $this->redirectToRoute('meeting_list');
     }
     /**
     * @Route(path="/list" ,name="_list")
@@ -144,10 +144,7 @@ class MeetingController extends AbstractController
 
 
 
-        /*return $this->render('meeting/list.html.twig', [
-            'meetings' => $pagination
-        ]);
-    }*/
+       
 
     /**
      * @param Request $request
