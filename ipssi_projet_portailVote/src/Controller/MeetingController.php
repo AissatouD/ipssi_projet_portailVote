@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Meeting;
 use App\Form\MeetingType;
 use App\Repository\MeetingRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -95,17 +96,29 @@ class MeetingController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('meeting_list');
     }
+
     /**
-    * @Route(path="/list" ,name="_list")
-    */
-    public function list(): Response
+     * @Route(path="/list" ,name="_list")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    public function list(PaginatorInterface $paginator, Request $request): Response
     {
+
+        $repository = $this->getDoctrine()->getRepository(Meeting::class);
+        $pagination = $paginator->paginate(
+            $repository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 );/*limit per page*/
+
         $repository = $this->getDoctrine()->getRepository(Meeting::class);
         $meetings = $repository->findAll();
         return $this->render(
             'meeting/list.html.twig',
             [
-                'meetings' => $repository->findAll(),
+                'pagination'=>$pagination,
+                'meetings' => $meetings,
             ]
         );
     }

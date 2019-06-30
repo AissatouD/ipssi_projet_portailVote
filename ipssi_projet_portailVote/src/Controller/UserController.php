@@ -88,20 +88,42 @@ class UserController extends AbstractController
         ]);
     }
 
+    /*
+
     /**
-     * @Route("admin/user/delete/{id}", name="admin_user_delete", methods={"DELETE"})
      * @param Request $request
      * @param User $user
      * @return Response
+     *@Route("admin/user/delete/{id}", name="admin_user_delete", methods={"DELETE"})
      */
+    /*
     public function deleteUser(Request $request, User $user): Response
     {
+        $user = new User;
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
         }
 
+        return $this->render('admin/userDelete.html.twig',
+            ['user'=> $user]);
+
+
+    }*/
+    /**
+     * @param User $user
+     * @return Response
+     * @Route("admin/user/delete/{id}", name="admin_user_delete", methods={"GET"})
+     */
+
+    public function delete(User $user, String $successMessage): Response
+    {
+        $successMessage ->addFlash("success", "This is a success message");
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
         return $this->redirectToRoute('admin_user_list');
     }
+
 }

@@ -15,15 +15,22 @@
                 {{ form_row(form.password, {'label':'Mot de passe', 'attr': {'placeholder': 'Choisissez un mot de passe' }}) }}
                 {{ form_row(form.roles , {'label':'Role'}) }}
 
-            <button type="submit">Envoyer</button>
-            {{ form_end (form) }}
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop2" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
+                <a class="dropdown-item" href="#">Dropdown link</a>
+                <a class="dropdown-item" href="#">Dropdown link</a>
+            </div>
 
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+                {{ form_end (form) }}
 
-
-    {#{%  include('admin/listUser.html.twig')  %}#}
 
         </div>
 </div>
 
-    <a href="{{ path('admin_user_list') }}">back to list</a>
+
+    <button type="button"
+            class="btn btn-warning disabled"
+            onclick="document.location.href=' {{ path('admin_user_list') }}'">
+            Revenir en arrière</button>
+
 {% endblock %}
