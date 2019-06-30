@@ -16,12 +16,12 @@
         <tbody>
         {% for meeting in topMeeting %}
         <tr>
-            <td>{{ meeting.title }}</td>
+            <td><a href="{{ path('meeting_view', {id: meeting.id}) }}">{{ meeting.title }}</a></td>
             <td>{{ meeting.description }}</td>
             <td>{{ meeting.date|date("m/d/Y") }}</td>
             <td>{{ meeting.location}}</td>
             <td>{{ meeting.note}}/5</td>
-            <td><a href="{{ path('voteapp_vote_add', {id: meeting.id}) }}">Noter</a></td>
+            <td><a href="{{ path('vote_add', {id: meeting.id}) }}">Noter</a></td>
            
         </tr>
         {% endfor %}
